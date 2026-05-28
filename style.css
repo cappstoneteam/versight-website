@@ -1,0 +1,436 @@
+/* ───────────────────────────────────────────────────────────────────────────
+   Versight marketing site — shared styles.
+   Mirrors the iOS palette + typography (VColors.swift, VTypography.swift)
+   so the web identity reads as the same brand.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* Palette — exact match to the iOS app */
+  --bg:             #F5EFE3;
+  --surface:        #EDE5D2;
+  --surface-raised: #FBF6EA;
+  --divider:        #E2D7BF;
+  --divider-strong: #CDBE9C;
+  --ink:            #2A241B;
+  --ink-muted:      #6B5E4D;
+  --ink-soft:       #9B8C75;
+  --accent:         #B8893E;
+  --accent-deep:    #8E6628;
+  --accent-soft:    #F0E1C0;
+  --on-accent:      #FFF7E7;
+  --error:          #A6533C;
+
+  /* Type */
+  --f-display: 'Cormorant Garamond', 'New York', Georgia, 'Times New Roman', serif;
+  --f-body:    'Lora', Georgia, 'Times New Roman', serif;
+  --f-sans:    -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--accent-deep);
+  text-decoration: none;
+  transition: color 120ms ease-out;
+}
+a:hover { color: var(--accent); }
+
+h1, h2, h3, h4 {
+  font-family: var(--f-display);
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.15;
+  margin: 0 0 .5em;
+}
+h1 { font-size: clamp(36px, 6.5vw, 64px); letter-spacing: -0.01em; }
+h2 { font-size: clamp(26px, 3.5vw, 38px); margin-top: 1.5em; }
+h3 { font-size: clamp(20px, 2.5vw, 24px); margin-top: 1.2em; }
+
+p { margin: 0 0 1em; }
+
+/* ─── Layout ─────────────────────────────────────────────────────────── */
+
+.shell {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 24px 24px 80px;
+}
+
+.shell--narrow { max-width: 740px; }
+
+/* Top nav */
+header.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 0 16px;
+}
+
+.site-nav .brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--ink);
+}
+.site-nav .brand img {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid var(--divider);
+}
+.site-nav .brand span {
+  font-family: var(--f-display);
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.site-nav nav {
+  display: flex;
+  gap: 28px;
+}
+.site-nav nav a {
+  font-family: var(--f-body);
+  font-size: 14.5px;
+  color: var(--ink-muted);
+}
+.site-nav nav a:hover { color: var(--ink); }
+
+/* ─── Hero ───────────────────────────────────────────────────────────── */
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 56px;
+  align-items: center;
+  padding: 80px 0 60px;
+}
+
+.hero h1 {
+  margin-bottom: 0.4em;
+}
+.hero .lede {
+  font-family: var(--f-body);
+  font-size: clamp(17px, 1.7vw, 21px);
+  color: var(--ink-muted);
+  line-height: 1.5;
+  font-style: italic;
+  margin-bottom: 28px;
+  max-width: 36ch;
+}
+
+.hero-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hero-icon img {
+  width: 100%;
+  max-width: 280px;
+  aspect-ratio: 1;
+  border-radius: 56px;
+  box-shadow: 0 24px 60px -20px rgba(184, 137, 62, 0.35),
+              0 8px 24px -8px rgba(42, 36, 27, 0.18);
+}
+
+/* CTA — App Store button */
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 28px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-family: var(--f-display);
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px -6px rgba(184, 137, 62, 0.4);
+  transition: transform 120ms ease-out, box-shadow 120ms ease-out;
+}
+.cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px -8px rgba(184, 137, 62, 0.5);
+  color: var(--on-accent);
+}
+.cta svg { width: 22px; height: 22px; }
+
+.cta-note {
+  display: block;
+  margin-top: 12px;
+  font-family: var(--f-body);
+  font-size: 13px;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+/* ─── Section: Benefits ──────────────────────────────────────────────── */
+
+section.benefits {
+  padding: 60px 0 40px;
+}
+section.benefits h2 {
+  text-align: center;
+  margin-bottom: 8px;
+}
+section.benefits .section-sub {
+  text-align: center;
+  color: var(--ink-muted);
+  font-style: italic;
+  margin-bottom: 48px;
+}
+
+.benefit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+}
+
+.benefit-card {
+  background: var(--surface-raised);
+  border: 1px solid var(--divider);
+  border-radius: 16px;
+  padding: 26px 22px;
+}
+.benefit-card .icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  display: grid;
+  place-items: center;
+  margin-bottom: 16px;
+}
+.benefit-card .icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: var(--accent-deep);
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.benefit-card h3 {
+  font-size: 19px;
+  font-family: var(--f-display);
+  margin: 0 0 6px;
+}
+.benefit-card p {
+  margin: 0;
+  font-size: 14.5px;
+  color: var(--ink-muted);
+  line-height: 1.5;
+}
+
+/* ─── Quote / closing section ────────────────────────────────────────── */
+
+section.quote {
+  padding: 60px 0;
+  text-align: center;
+}
+section.quote blockquote {
+  margin: 0 auto;
+  max-width: 36ch;
+  font-family: var(--f-display);
+  font-size: clamp(22px, 2.6vw, 30px);
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1.35;
+}
+section.quote cite {
+  display: block;
+  margin-top: 18px;
+  font-family: var(--f-body);
+  font-size: 13px;
+  font-style: normal;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* ─── Final CTA ──────────────────────────────────────────────────────── */
+
+section.final-cta {
+  padding: 60px 0;
+  text-align: center;
+  border-top: 1px solid var(--divider);
+  border-bottom: 1px solid var(--divider);
+  background: var(--surface);
+}
+section.final-cta h2 {
+  margin-bottom: 8px;
+}
+section.final-cta p {
+  color: var(--ink-muted);
+  font-style: italic;
+  margin-bottom: 28px;
+}
+
+/* ─── Footer ─────────────────────────────────────────────────────────── */
+
+footer.site-foot {
+  padding: 48px 0 24px;
+  border-top: 1px solid var(--divider);
+  font-size: 13.5px;
+}
+footer.site-foot .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  color: var(--ink-soft);
+}
+footer.site-foot nav {
+  display: flex;
+  gap: 22px;
+}
+footer.site-foot nav a { color: var(--ink-muted); }
+
+/* ─── Long-form pages (privacy, terms, contacts) ─────────────────────── */
+
+.doc {
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: var(--ink);
+}
+.doc h1 { font-size: clamp(32px, 5vw, 44px); margin-bottom: 6px; }
+.doc h2 { font-size: clamp(20px, 2.5vw, 26px); margin-top: 2em; }
+.doc h3 { font-size: 18px; margin-top: 1.5em; }
+.doc .meta {
+  color: var(--ink-soft);
+  font-size: 13.5px;
+  font-style: italic;
+  margin-bottom: 2em;
+  padding-bottom: 1.5em;
+  border-bottom: 1px solid var(--divider);
+}
+.doc ul {
+  padding-left: 1.2em;
+  margin: 0 0 1em;
+}
+.doc ul li {
+  margin-bottom: 0.4em;
+}
+.doc strong { color: var(--ink); }
+.doc .callout {
+  background: var(--accent-soft);
+  border-left: 3px solid var(--accent);
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin: 1.5em 0;
+  color: var(--ink);
+}
+.doc .callout strong { color: var(--accent-deep); }
+
+/* ─── Contact form ────────────────────────────────────────────────────── */
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 32px;
+}
+.contact-form label {
+  font-family: var(--f-body);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 6px;
+  display: block;
+}
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  font-family: var(--f-body);
+  font-size: 15.5px;
+  color: var(--ink);
+  background: var(--surface-raised);
+  border: 1.4px solid var(--divider);
+  border-radius: 12px;
+  padding: 14px 16px;
+  outline: none;
+  transition: border-color 120ms ease-out, box-shadow 120ms ease-out;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+.contact-form textarea {
+  min-height: 160px;
+  resize: vertical;
+  font-family: var(--f-body);
+}
+.contact-form button {
+  align-self: flex-start;
+  padding: 14px 28px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-family: var(--f-display);
+  font-size: 17px;
+  font-weight: 500;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px -6px rgba(184, 137, 62, 0.4);
+  transition: transform 100ms ease-out, box-shadow 120ms ease-out;
+}
+.contact-form button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px -6px rgba(184, 137, 62, 0.5);
+}
+.contact-form button:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.form-msg {
+  padding: 14px 18px;
+  border-radius: 12px;
+  font-size: 14.5px;
+  display: none;
+}
+.form-msg.success {
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  display: block;
+}
+.form-msg.error {
+  background: rgba(166, 83, 60, 0.12);
+  color: var(--error);
+  display: block;
+}
+
+/* ─── Responsive ────────────────────────────────────────────────────── */
+
+@media (max-width: 760px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 40px 0;
+    gap: 32px;
+    text-align: center;
+  }
+  .hero .lede { margin-left: auto; margin-right: auto; }
+  .hero-icon { order: -1; }
+  .hero-icon img { max-width: 200px; }
+  .site-nav { padding: 16px 0; }
+  .site-nav nav { gap: 18px; }
+  .site-nav nav a { font-size: 13.5px; }
+  footer.site-foot .row { justify-content: center; text-align: center; }
+}

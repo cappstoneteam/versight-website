@@ -1,0 +1,15 @@
+# Cloudflare Pages / Netlify-compatible redirects.
+#
+# Cloudflare Pages automatically serves /foo.html at /foo, so most
+# requests already work without entries here. These rules are mostly
+# safety nets:
+#   - normalize trailing slashes
+#   - ensure /contact (singular) also reaches the contact page
+#   - redirect any legacy "index.html" requests to the bare domain
+
+/index.html        /                  301
+/contact           /contacts          301
+/contact/          /contacts          301
+/privacy.html      /privacy           301
+/terms.html        /terms             301
+/contacts.html     /contacts          301

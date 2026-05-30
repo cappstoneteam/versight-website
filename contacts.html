@@ -64,6 +64,14 @@
         <input type="hidden" name="access_key" value="5181ed98-6f65-49f4-903a-f2fe1e210f1c" />
         <input type="hidden" name="subject" value="New Versight contact form submission" />
         <input type="hidden" name="from_name" value="Versight Website" />
+        <!--
+          Internal app user id. The iOS app opens this page as
+          /contacts?uid=<uuid> from Settings → Contact support; the script
+          below copies that query param into this field so it rides along in
+          the email to support and lets us correlate the request with the
+          account. Empty (and removed before send) for plain web visitors.
+        -->
+        <input type="hidden" name="user_id" id="userIdField" value="" />
         <!-- honeypot: real users won't fill this; spam bots will -->
         <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
 
@@ -119,6 +127,22 @@
       const msg = document.getElementById('formMsg');
       const btn = document.getElementById('submitBtn');
       if (!form) return;
+
+      // Carry the app user id (from /contacts?uid=<uuid>) into the email.
+      // Set it as the attribute too so form.reset() keeps it. If there's no
+      // uid (a plain web visitor), drop the field so support doesn't get an
+      // empty "user_id" line.
+      (function () {
+        const uid = new URLSearchParams(location.search).get('uid');
+        const field = document.getElementById('userIdField');
+        if (!field) return;
+        if (uid && uid.trim()) {
+          field.value = uid.trim();
+          field.setAttribute('value', uid.trim());
+        } else {
+          field.remove();
+        }
+      })();
 
       form.addEventListener('submit', async function (e) {
         e.preventDefault();

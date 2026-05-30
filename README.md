@@ -124,6 +124,17 @@ service for static sites. Before going live:
 Alternative services (drop-in replacements — just swap the `action`
 URL): Formspree, Basin, Getform, FormSubmit, Tally.
 
+### App user id in support emails
+
+The iOS app opens this page as `/contacts?uid=<uuid>` (Settings → Contact
+support). `contacts.html` reads that `uid` query param and copies it into a
+hidden `user_id` field, so the support email includes the account id and we
+can correlate the request with the user. For plain web visitors (no `uid`)
+the field is removed before sending, so the email has no empty line.
+
+If you swap Web3Forms for another provider, keep the hidden `user_id` field
+and the small script that populates it — that's all the integration needs.
+
 ## App Store link
 
 The CTA buttons in `index.html` currently point at a placeholder URL:
